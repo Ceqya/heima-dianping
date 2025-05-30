@@ -66,6 +66,18 @@
             <artifactId>aspectjweaver</artifactId>
             <version>1.9.7</version> <!-- 可根据需要调整版本 -->
         </dependency>
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
+            <version>3.44.0</version>
+        </dependency>
+        <!-- 如果你用的是 Maven -->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-transport-native-unix-common</artifactId>
+            <version>4.1.121.Final</version> <!-- 这个版本根据你使用的 Redisson 版本而定 -->
+        </dependency>
+
 
     </dependencies>
 
