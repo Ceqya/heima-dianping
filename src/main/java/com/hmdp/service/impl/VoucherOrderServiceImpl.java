@@ -140,7 +140,7 @@ public class VoucherOrderServiceImpl extends ServiceImpl<VoucherOrderMapper, Vou
         voucherOrder.setUserId(userId);
         //2.6代金券id
         voucherOrder.setVoucherId(voucherId);
-        //TODO 保存阻塞队列
+        //保存阻塞队列
         //2.6放入阻塞队列
         orderTasks.add(voucherOrder);
         //3.获取代理对象
