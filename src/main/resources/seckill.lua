@@ -3,6 +3,8 @@
 local voucherId = ARGV[1]
 --1.2用户id
 local userId = ARGV[2]
+--1.3订单id
+local orderId = ARGV[3]
 
 --2.数据key
 --2.1库存key
@@ -17,11 +19,13 @@ if (tonumber(redis.call('get', stockKey)) <= 0) then
 end
 --3.2判断用户是否下单
 if (redis.call('sismember', orderKey, userId) == 1) then
-    --3.2用户已下单，返回错误
+    --3.3用户已下单，返回错误
     return 2
 end
---3.3扣减库存
+--3.4扣减库存
 redis.call('decr', stockKey)
---3.4下单
+--3.5下单
 redis.call('sadd', orderKey, userId)
+--3.6发送消息到队列中，xadd stream.orders * k1 v1 k2 v2 ...
+redis.call('xadd', 'stream.orders', '*',  'userId', userId,'voucherId', voucherId, 'id', orderId)
 return 0
